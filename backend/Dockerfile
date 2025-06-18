@@ -1,6 +1,9 @@
 
 
-# FROM mysqL:8.0
-FROM mysql:8.0
-ENV MYSQL_ROOT_PASSWORD=ExpenseApp@1
-COPY scripts/*.sql /docker-entrypoint-initdb.d
+FROM node:20
+WORKDIR /opt/backend
+COPY package.json .
+COPY *.js .
+RUN npm install
+ENV DB_HOST="mysql"
+CMD ["node", "index.js"]Add comment
