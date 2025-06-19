@@ -17,7 +17,7 @@ services:
     image: mysql:1.0.0
     networks:
     - expense
-    conatiner_name: mysql
+    container_name: mysql
     volumes:
     - mysql:/var/lib/mysql
 
@@ -25,8 +25,10 @@ services:
     image: frontend:1.0.0
     networks:
     - expense
-    conatiner_name: frontend
+    container_name: frontend
     ports:
     - 80:80
     depends_on:
     - backend
+  
+  
