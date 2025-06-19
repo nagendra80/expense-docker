@@ -1,6 +1,6 @@
 #FROM nginx
 FROM nginx:stable-alpine3.20-slim
-# RUN rm -rf /usr/share/nginx/html/index.html
+RUN rm -rf /usr/share/nginx/html/index.html
 RUN rm -rf /etc/nginx/nginx.conf
 RUN rm -rf /etc/nginx/conf.d/default.conf
 RUN mkdir -p /var/cache/nginx/client_temp && \
@@ -21,4 +21,4 @@ RUN touch /var/run/nginx.pid && \
     chown -R nginx:nginx /var/run/nginx.pid /run/nginx.pid
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY code /usr/share/nginx/html
-# USER nginx
+USER nginx
