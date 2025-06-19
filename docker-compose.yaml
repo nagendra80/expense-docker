@@ -4,15 +4,6 @@ networks:
 volumes:
   mysql:
 services:
-  backend:
-    image: nagendra80/backend:1.0.0
-    command: sh -c "sleep 10 && node /opt/backend/index.js"
-    networks:
-    - expense
-    container_name: backend
-    depends_on:
-    - mysql
-
   # docker run -d --name mysql --network expense -v mysql:/var/lib/mysql mysql:1.0.0
   mysql:
     image: nagendra80/mysql:1.0.0
@@ -22,14 +13,27 @@ services:
     volumes:
     - mysql:/var/lib/mysql
 
+  backend:
+    image: nagendra80/backend:1.0.0
+    depends_on:
+    - mysql
+    command: sh -c "sleep 10 && node /opt/backend/index.js"
+    networks:
+    - expense
+    container_name: backend
+    
+
+  
+
   frontend:
     image: nagendra80/frontend:1.0.0
+    depends_on:
+    - backend
     networks:
     - expense
     container_name: frontend
     ports:
-    - 80:80
-    depends_on:
-    - backend
+    - 8080:80
+    
   
   
